@@ -11,4 +11,4 @@ runs:
     - name: Setup Java
       uses: actions/setup-java@v2.4.0
       with:
-        java-version: ${{ steps.java-version.outputs-java-version }}
+        java-version: ${{ steps.java-version.outputs.java-version }}
