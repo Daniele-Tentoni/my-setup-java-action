@@ -25,5 +25,5 @@ jobs:
 
       - name: Check the installed java version
         run: |
-          CUR_JAVA_VERSION=java -version 2>&1 head -1 cut -d'"' -f2 sed 's/^1\.//' cut -d'.' -f1
+          CUR_JAVA_VERSION=java --version 2>&1 head -1 cut -d'"' -f2 sed 's/^1\.//' cut -d'.' -f1
           "[[ $CUR_JAVA_VERSION -eq 17 ]]"
