@@ -24,4 +24,14 @@ jobs:
         uses: ./
 
       - name: Check the installed java version
-        run: "[[ java --version -eq 17 ]]"
+        if: runner.os != 'Windows'
+        run: "[[ `java --version` -eq 17 ]]"
+
+      - name: Check the Java version
+        if: runner.os == 'Windows'
+        run: |
+          if ( `java --version` -eq 17 )
+          {
+            exit 0
+          }
+          exit 1
