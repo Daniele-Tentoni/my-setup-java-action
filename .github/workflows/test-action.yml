@@ -24,6 +24,14 @@ jobs:
         uses: ./
 
       - name: Check the installed java version
+        if: runner.os != 'Windows'
+        run: "[[ ${{ steps.java-version.outputs.java-version }} -eq 17 ]]"
+
+      - name: Check the Java version
+        if: runner.os == 'Windows'
         run: |
-          CUR_JAVA_VERSION=java --version 2>&1 head -1 cut -d'"' -f2 sed 's/^1\.//' cut -d'.' -f1
-          "[[ $CUR_JAVA_VERSION -eq 17 ]]"
+          if ( ${{ steps.java-version.outputs.java-version }} -eq 17 )
+          {
+            exit 0
+          }
+          exit 1

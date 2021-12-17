@@ -1,6 +1,11 @@
 name: "My Setup Java Version"
 description: "Set the latest Java version for the current gradle version found in the project."
 
+outputs:
+  java-version:
+    description: "Java version set"
+    value: ${{ steps.setup-java.outputs.version }}
+
 runs:
   using: "composite"
   steps:
@@ -9,6 +14,7 @@ runs:
       uses: daniele-tentoni/java-version-action@1.0.0
 
     - name: Setup Java
+      id: setup-java
       uses: actions/setup-java@v2.4.0
       with:
         distribution: 'adopt'
