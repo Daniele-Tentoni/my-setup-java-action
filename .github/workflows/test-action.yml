@@ -31,6 +31,6 @@ jobs:
       - name: Check the Java version
         if: runner.os == 'Windows'
         run: |
-          $jv = ${{ steps.java-version.outputs.java-version }}
-          if ( $jv.tostring().StartsWith("17") ) { exit 0 }
+          $jv = '${{ steps.java-version.outputs.java-version }}'
+          if ( $jv.StartsWith("17") ) { exit 0 }
           exit 1
