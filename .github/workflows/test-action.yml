@@ -27,9 +27,10 @@ jobs:
         if: runner.os != 'Windows'
         run: "[[ ${{ steps.java-version.outputs.java-version }} == 17* ]]"
 
+      # or use command: (Get-Command java | Select-Object -ExpandProperty Version).tostring()
       - name: Check the Java version
         if: runner.os == 'Windows'
         run: |
-          SET _v=${{ steps.java-version.outputs.java-version }}
-          if ( _v.StartsWith("17") ) { exit 0 }
+          $jv = ${{ steps.java-version.outputs.java-version }}
+          if ( $jv.tostring().StartsWith("17") ) { exit 0 }
           exit 1
