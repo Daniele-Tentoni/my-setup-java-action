@@ -25,12 +25,13 @@ jobs:
 
       - name: Check the installed java version
         if: runner.os != 'Windows'
-        run: "[[ ${{ steps.java-version.outputs.java-version }} -eq 17 ]]"
+        run: "[[ ${{ steps.java-version.outputs.java-version }} == 17* ]]"
 
       - name: Check the Java version
         if: runner.os == 'Windows'
         run: |
-          if ( ${{ steps.java-version.outputs.java-version }} -eq 17 )
+          SET _v=${{ steps.java-version.outputs.java-version }}
+          if ( %_v:~0,2%=="17" )
           {
             exit 0
           }
