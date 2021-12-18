@@ -11,7 +11,7 @@ runs:
   steps:
     - name: Get the latest java version supported
       id: java-version
-      uses: daniele-tentoni/java-version-action@1.0.0
+      uses: daniele-tentoni/java-version-action@1.0.1
 
     - name: Setup Java
       id: setup-java
