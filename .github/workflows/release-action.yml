@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    uses: daniele-tentoni/my-setup-java-action/.github/workflows/test-action@main
+    uses: daniele-tentoni/my-setup-java-action/.github/workflows/test-action.yml@main
 
   release:
     needs: [test]
