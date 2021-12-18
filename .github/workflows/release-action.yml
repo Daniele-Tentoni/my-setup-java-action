@@ -1,0 +1,26 @@
+name: Test Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    uses: daniele-tentoni/my-setup-java-action/.github/workflows/test-action@main
+
+  release:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+        with:
+          token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+
+      - name: Release using Semantic Releasing
+        run: |
+          npm install
+          npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}

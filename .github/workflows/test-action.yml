@@ -1,0 +1,36 @@
+name: Test Action
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Create default properties file
+        run: echo "distributionUrl=https\://services.gradle.org/distributions/gradle-7.3.2-bin.zip" >> gradle-wrapper.properties
+
+      - name: Run Setup Java Version Step
+        id: java-version
+        uses: ./
+
+      - name: Check the installed java version
+        if: runner.os != 'Windows'
+        run: "[[ ${{ steps.java-version.outputs.java-version }} == 17* ]]"
+
+      # or use command: (Get-Command java | Select-Object -ExpandProperty Version).tostring()
+      - name: Check the Java version
+        if: runner.os == 'Windows'
+        run: |
+          $jv = '${{ steps.java-version.outputs.java-version }}'
+          if ( $jv.StartsWith("17") ) { exit 0 }
+          exit 1
