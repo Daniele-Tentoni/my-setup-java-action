@@ -31,5 +31,5 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           SET _v=${{ steps.java-version.outputs.java-version }}
-          if /i "%_v:~0,2%"=="cd" exit 0
+          if (/i "%_v:~0,2%"=="cd") { exit 0 }
           exit 1
