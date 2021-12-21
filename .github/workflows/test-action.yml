@@ -18,14 +18,13 @@ jobs:
         with:
           path: action
 
-      - name: Create default properties file
-        run: |
-          name=gradle-wrapper-example
-          repo=https://github.com/Daniele-Tentoni/$name.git
-          v=$(git ls-remote --tags --sort=-v:refname $repo | cut -f 1 | head -n 1)
-          git clone $repo
-          cd $name
-          git checkout $v
+      - name: Clone default repo in *nix systems
+        if: runner.os != 'Windows'
+        run: ./action/clone.sh
+
+      - name: Clone default repo in Windows systems
+        if: runner.os == 'Windows'
+        run: ./action/clone.bat
 
       - name: Run Setup Java Version Step
         id: java-version
