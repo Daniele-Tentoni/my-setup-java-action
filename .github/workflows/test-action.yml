@@ -20,11 +20,11 @@ jobs:
 
       - name: Clone default repo in *nix systems
         if: runner.os != 'Windows'
-        run: ./action/clone.sh
+        run: ./action/src/clone.sh
 
       - name: Clone default repo in Windows systems
         if: runner.os == 'Windows'
-        run: ./action/clone.bat
+        run: ./action/src/clone.bat
 
       - name: Run Setup Java Version Step
         id: java-version
