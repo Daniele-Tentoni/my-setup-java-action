@@ -7,7 +7,21 @@ on:
   workflow_call:
 
 jobs:
+  # Fetch remote repo to get the most recent tag to use to test action.
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch remote repo
+        id: repo-version
+        run: |
+          name=gradle-wrapper-example
+          repo=https://github.com/Daniele-Tentoni/$name.git
+          echo "::set-output name=repo::$repo"
+          v=$(git ls-remote --tags --sort=-v:refname $repo | cut -f 1 | head -n 1)
+          echo "::set-output name=version::$v"
+
   test:
+    needs: [fetch]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -20,12 +34,9 @@ jobs:
 
       - name: Create default properties file
         run: |
-          name=gradle-wrapper-example
-          repo=https://github.com/Daniele-Tentoni/$name.git
-          v=$(git ls-remote --tags --sort=-v:refname $repo | cut -f 1 | head -n 1)
-          git clone $repo
+          git clone ${{ steps.repo-version.outputs.repo }}
           cd $name
-          git checkout $v
+          git checkout ${{ steps.repo-version.outputs.version }}
 
       - name: Run Setup Java Version Step
         id: java-version
