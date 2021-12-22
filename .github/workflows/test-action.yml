@@ -7,6 +7,7 @@ on:
   workflow_call:
 
 env:
+  repo-owner: daniele-tentoni
   repo-name: gradle-wrapper-example
 
 jobs:
@@ -14,14 +15,12 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     outputs:
-      repo: ${{ steps.repo-version.outputs.repo }}
       version: ${{ steps.repo-version.outputs.version }}
     steps:
       - name: Fetch remote repo
         id: repo-version
         run: |
-          repo=https://github.com/Daniele-Tentoni/${{ env.repo-name }}.git
-          echo "::set-output name=repo::$repo"
+          repo=https://github.com/${{ env.repo-owner }}/${{ env.repo-name }}.git
           v=$(git ls-remote --tags --sort=-v:refname $repo | cut -f 1 | head -n 1)
           echo "::set-output name=version::$v"
 
@@ -40,7 +39,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
         with:
-          repository: ${{ needs.fetch.outputs.repo }}
+          repository: ${{ env.repo-owner }}/${{ env.repo-name }}
           ref: ${{ needs.fetch.outputs.version }}
           path: ${{ env.repo-name }}
 
