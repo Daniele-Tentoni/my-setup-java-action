@@ -37,11 +37,12 @@ jobs:
         with:
           path: action
 
-      - name: Create default properties file
-        run: |
-          git clone ${{ needs.fetch.outputs.repo }}
-          cd ${{ env.repo-name }}
-          git checkout ${{ needs.fetch.outputs.version }}
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          repository: ${{ needs.fetch.outputs.repo }}
+          ref: ${{ needs.fetch.outputs.version }}
+          path: ${{ env.repo-name }}
 
       - name: Run Setup Java Version Step
         id: java-version
