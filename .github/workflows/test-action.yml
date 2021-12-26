@@ -33,19 +33,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
-        with:
-          path: 'action'
 
-      - name: Checkout
+      - name: Checkout example gradle project
         uses: actions/checkout@v1
         with:
           repository: ${{ env.repo-owner }}/${{ env.repo-name }}
           ref: ${{ needs.fetch.outputs.version }}
-          path: '${{ env.repo-name }}'
+          path: ${{ env.repo-name }}
 
       - name: Run Setup Java Version Step
         id: java-version
-        uses: ./action
+        uses: ./
 
       - name: Check the installed java version
         if: runner.os != 'Windows'
