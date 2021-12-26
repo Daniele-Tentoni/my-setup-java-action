@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/Daniele-Tentoni/my-setup-java-action/compare/1.0.0...1.0.1) (2021-12-26)
+
+
+### Bug Fixes
+
+* change action path. ([160e3fd](https://github.com/Daniele-Tentoni/my-setup-java-action/commit/160e3fd0b010e9d0d8cad52c72aee771c26c4da8))
+* use right version of gradle action. ([c6e8062](https://github.com/Daniele-Tentoni/my-setup-java-action/commit/c6e80626aba62fda57838af8f3ef6d499a98e065))
+
 # 1.0.0 (2021-12-18)
 
 
