@@ -34,14 +34,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.4.0
         with:
-          path: action
+          path: 'action'
 
       - name: Checkout
         uses: actions/checkout@v1
         with:
           repository: ${{ env.repo-owner }}/${{ env.repo-name }}
           ref: ${{ needs.fetch.outputs.version }}
-          path: ${{ env.repo-name }}
+          path: '${{ env.repo-name }}'
 
       - name: Run Setup Java Version Step
         id: java-version
