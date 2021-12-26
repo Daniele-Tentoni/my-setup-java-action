@@ -17,5 +17,5 @@ runs:
       id: setup-java
       uses: actions/setup-java@v2.4.0
       with:
-        distribution: 'adopt'
+        distribution: "adopt"
         java-version: ${{ steps.java-version.outputs.java-version }}
