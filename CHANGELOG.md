@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Daniele-Tentoni/my-setup-java-action/compare/1.0.1...1.0.2) (2022-11-02)
+
+
+### Bug Fixes
+
+* update README.md to reflect java version action update ([2ae9aec](https://github.com/Daniele-Tentoni/my-setup-java-action/commit/2ae9aeca414f7f0a70c1c7d6cbe787aae2228608))
+
 ## [1.0.1](https://github.com/Daniele-Tentoni/my-setup-java-action/compare/1.0.0...1.0.1) (2021-12-26)
 
 
